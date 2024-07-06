@@ -4,8 +4,8 @@ export interface OrganisationInterface {
     name: string,
     description: string,
     users: User[],
-    createdAt: Date,
-    updatedAt: Date
+    createdAt?: Date,
+    updatedAt?: Date
 }
 
 

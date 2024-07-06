@@ -42,6 +42,15 @@ export const getOneUser = async (userId: string) => {
     return user;
 }
 
+export const getUserEmail = async (userEmail: string) => {
+    const user = await userRepository.findOne({
+        where: {email: userEmail},
+        relations: ["organisations"]
+    });
+
+    return user;
+}
+
 export const deleteUser = async (userId: string) => {
     const user = await userRepository.delete(userId);
     return user;
