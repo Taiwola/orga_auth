@@ -4,6 +4,8 @@ import { connect } from "./database/database-source";
 
 dotenv.config();
 
+
+import {authRouter} from "./routes/auth.route"
 declare global {
     namespace Express {
       interface Request {
@@ -24,6 +26,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
+
+app.use("/api/auth", authRouter);
 
 
 async function  startServer() {
