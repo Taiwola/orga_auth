@@ -1,5 +1,6 @@
 import {connectionSource} from "../database/database-source";
 import { Organisation } from "../database/enitites/organisation-model";
+import { User } from "../database/enitites/user-model";
 import { OrganisationInterface, OrganisationPartialInterface } from "../interface/organisation.interface";
 
 
@@ -25,7 +26,6 @@ export const updateOrganisation = async (orgId:string, orgaData: OrganisationPar
     return org;
 }
 
-
 export const getAllOrg = async () => {
     const orgs = await organisationRepository.find({
         relations: ["users"]
@@ -34,6 +34,10 @@ export const getAllOrg = async () => {
     return orgs;
 };
 
+export const addUserToOrg = async (user: User, org: Organisation) => {
+    org.users.push(user);
+    return await organisationRepository.save(org);
+}
 
 export const getOneOrg = async (orgId:string) => {
     const org = await organisationRepository.findOne({

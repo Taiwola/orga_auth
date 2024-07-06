@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
-import { createOrganisation, getAllUserOrg, getOneOrg, updateOrganisation } from "../service";
+import { addUserToOrg, createOrganisation, getAllUserOrg, getOneOrg, getOneUser, updateOrganisation } from "../service";
 import { createOrgValidator } from "../utils/validator";
-import { OrganisationInterface } from "../interface/organisation.interface";
+import { OrganisationInterface, OrganisationPartialInterface } from "../interface/organisation.interface";
 
 
 export const get_all_org = async (req: Request, res: Response) => {
@@ -66,12 +66,22 @@ export const create_org = async (req: Request , res: Response) => {
     })
 }
 
-export const addUserToOrg = async (req: Request, res: Response) => {
+export const add_UserTo_Org = async (req: Request, res: Response) => {
     try {
         const {userId} = req.body;
         const Id = req.params.Id;
 
         const org = await getOneOrg(Id);
+        const user = await getOneUser(userId);
+
+
+        if (!user) {
+            return res.status(404).json({
+                status: "NotFound",
+                message: "User does not exist",
+                statusCode: 404
+            })
+        }
 
         if (!org) {
             return res.status(404).json({
@@ -81,7 +91,9 @@ export const addUserToOrg = async (req: Request, res: Response) => {
             })
         }
 
-            await updateOrganisation(org.orgId, userId);
+      
+
+           await addUserToOrg(user, org)
 
             return res.status(200).json({
                 status: "success",
