@@ -4,6 +4,17 @@ import { connect } from "./database/database-source";
 
 dotenv.config();
 
+declare global {
+    namespace Express {
+      interface Request {
+        user?: {
+          userId?: string 
+          email?: string
+        };
+      }
+    }
+  }
+
 const app = express.application;
 const PORT = process.env.PORT || 3000;
 
@@ -27,3 +38,4 @@ async function  startServer() {
 }
 
 startServer();
+export default app;

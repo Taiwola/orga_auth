@@ -4,9 +4,26 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "compile": "tsc && node ./dist/index.js",
     "dev": "nodemon -e ts --exec \"npm run compile\""
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "testMatch": [
+      "**/tests/**/*.spec.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
   },
   "keywords": [],
   "author": "",
