@@ -44,9 +44,9 @@ export const getOneOrg = async (orgId:string) => {
     return org;
 }
 
-export const checkUserExist = async (userEmail: string) => {
-    const org = await organisationRepository.findOne({
-        where: {users: {email: userEmail}}
+export const getAllUserOrg = async (userId: string) => {
+    const org = await organisationRepository.find({
+        where: {users: {userId: userId}}
     });
 
     return org;
