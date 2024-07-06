@@ -1,11 +1,12 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import dotenv from "dotenv";
 import { connect } from "./database/database-source";
 
 dotenv.config();
 
 
-import {authRouter} from "./routes/auth.route"
+import {authRouter} from "./routes/auth.route";
+import {userRouter} from "./routes/user.route";
 declare global {
     namespace Express {
       interface Request {
@@ -17,9 +18,8 @@ declare global {
     }
   }
 
-const app = express.application;
-const PORT = process.env.PORT || 3000;
-
+const app = express();
+const PORT = process.env.PORT || 5000;
 
 
 app.use(express.json());
@@ -27,7 +27,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 
-app.use("/api/auth", authRouter);
+
+app.use("/api/auth/", authRouter);
+app.use("/api/users/", userRouter);
 
 
 async function  startServer() {
