@@ -7,6 +7,7 @@ dotenv.config();
 
 import {authRouter} from "./routes/auth.route";
 import {userRouter} from "./routes/user.route";
+import {orgRouter} from "./routes/organisation.route";
 declare global {
     namespace Express {
       interface Request {
@@ -30,6 +31,7 @@ app.use(express.static('public'));
 
 app.use("/api/auth/", authRouter);
 app.use("/api/users/", userRouter);
+app.use('/api/organisations', orgRouter);
 
 
 async function  startServer() {
