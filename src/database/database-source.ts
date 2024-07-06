@@ -8,21 +8,21 @@ import { Organisation } from "./enitites/organisation-model";
 export const connectionSource = new DataSource(
     {
         "type": "postgres",
-        // "host": process.env.DB_HOST,
+        "host": process.env.DB_HOST,
         "port": 5432,
-        "url": process.env.DB_URL,
-        // "username": process.env.DB_USER,
-        // "password": process.env.DB_PASSWORD,
-        // "database": process.env.DB_NAME,
+        //"url": process.env.DB_URL,
+        "username": process.env.DB_USER,
+        "password": process.env.DB_PASSWORD,
+        "database": process.env.DB_NAME,
         "synchronize": true,
         "logging": false,
         "entities": [User, Organisation],
         "migrations": ["src/migrations/**/*.ts"],
         "subscribers": ["src/subscribers/**/*.ts"],
         connectTimeoutMS: 10000,
-        ssl: {
-          rejectUnauthorized: false
-        }
+        // ssl: {
+        //   rejectUnauthorized: false
+        // }
       }
       
 );

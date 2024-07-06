@@ -6,6 +6,7 @@ export const get_one_user = async (req: Request, res: Response) => {
     const Id = req.params.Id;
 
     const user = await getOneUser(Id);
+    console.log(`Fetched user: ${user}`);
 
     if (!user) {
         return res.status(404).json({

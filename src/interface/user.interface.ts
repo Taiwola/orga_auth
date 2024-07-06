@@ -1,14 +1,15 @@
 import { Organisation } from "../database/enitites/organisation-model"
 
 export interface UserInterface {
+    userId?: string,
     firstName: string,
     lastName: string,
     email: string,
     phone: string,
     password: string,
-    organisation: Organisation[],
-    createAt: Date,
-    updatedAt: Date
+    organisation?: Organisation[],
+    createdAt?: Date,
+    updatedAt?: Date
 }
 
 

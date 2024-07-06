@@ -11,6 +11,7 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "testTimeout": 10000,
     "testEnvironment": "node",
     "moduleFileExtensions": [
       "ts",
@@ -36,7 +37,8 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.5"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
