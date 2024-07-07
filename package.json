@@ -7,7 +7,7 @@
     "test:watch": "jest --watch",
     "test:unit": "jest --testMatch '**/tests/unit/**/*.spec.ts'",
     "test:e2e": "jest --testMatch '**/tests/e2e/**/*.spec.ts'",
-    "build": "tsc",
+    "build": "npm install && npm run compile",
     "compile": "tsc && node ./dist/src/index.js",
     "dev": "nodemon -e ts --exec \"npm run compile\"",
     "install": "npm install"
