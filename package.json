@@ -5,6 +5,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:unit": "jest --testMatch '**/tests/unit/**/*.spec.ts'",
+    "test:e2e": "jest --testMatch '**/tests/e2e/**/*.spec.ts'",
     "build": "tsc",
     "compile": "tsc && node ./dist/src/index.js",
     "dev": "nodemon -e ts --exec \"npm run compile\""
@@ -18,6 +20,9 @@
       "tsx",
       "js",
       "jsx"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest.setup.ts"
     ],
     "testMatch": [
       "**/tests/**/*.spec.ts"

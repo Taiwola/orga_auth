@@ -20,8 +20,10 @@ export const get_all_org = async (req: Request, res: Response) => {
 
 export const get_one_org = async (req: Request, res: Response) => {
     const Id = req.params.Id;
+    const userId = req.user.userId;
 
     const organisation = await getOneOrg(Id);
+    
 
     if (!organisation) {
         return res.status(404).json({
@@ -29,6 +31,17 @@ export const get_one_org = async (req: Request, res: Response) => {
             message: "Organisation does not exist",
             statusCode: 404
         })
+    }
+
+    const hasAccess = organisation.users.some((u: { userId: string }) => u.userId === userId);
+    console.log(hasAccess);
+
+    if (!hasAccess) {
+        return res.status(403).json({
+            status: 'Forbidden',
+            message: 'You do not have access to view this organisation',
+            statusCode: 403
+        });
     }
 
     return res.status(200).json({
