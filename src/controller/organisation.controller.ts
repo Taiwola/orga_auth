@@ -1,13 +1,11 @@
 import {Request, Response} from "express";
-import { addUserToOrg, createOrganisation, getAllUserOrg, getOneOrg, getOneUser, updateOrganisation } from "../service";
+import { addUserToOrg, createOrganisation, getAllOrg, getAllUserOrg, getOneOrg, getOneUser, updateOrganisation } from "../service";
 import { createOrgValidator } from "../utils/validator";
 import { OrganisationInterface, OrganisationPartialInterface } from "../interface/organisation.interface";
 
 
 export const get_all_org = async (req: Request, res: Response) => {
-    const userId = req.user.userId;
-
-    const organisation = await getAllUserOrg(userId);
+    const organisation = await getAllOrg();
 
 
     return res.status(200).json({
@@ -24,7 +22,7 @@ export const get_one_org = async (req: Request, res: Response) => {
 
     const organisation = await getOneOrg(Id);
     
-
+    console.log(organisation);
     if (!organisation) {
         return res.status(404).json({
             status: "Not Found",
@@ -33,8 +31,9 @@ export const get_one_org = async (req: Request, res: Response) => {
         })
     }
 
-    const hasAccess = organisation.users.some((u: { userId: string }) => u.userId === userId);
-    console.log(hasAccess);
+
+    const hasAccess = organisation.users.some((u) => u.userId === userId);
+
 
     if (!hasAccess) {
         return res.status(403).json({
