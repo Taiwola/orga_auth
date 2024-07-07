@@ -9,7 +9,8 @@
     "test:e2e": "jest --testMatch '**/tests/e2e/**/*.spec.ts'",
     "build": "tsc",
     "compile": "tsc && node ./dist/src/index.js",
-    "dev": "nodemon -e ts --exec \"npm run compile\""
+    "dev": "nodemon -e ts --exec \"npm run compile\"",
+    "install": "npm install"
   },
   "jest": {
     "preset": "ts-jest",
