@@ -7,10 +7,17 @@
     "test:watch": "jest --watch",
     "test:unit": "jest --testMatch '**/tests/unit/**/*.spec.ts'",
     "test:e2e": "jest --testMatch '**/tests/e2e/**/*.spec.ts'",
-    "build": "npm install",
+    "build": "rimraf dist && tsc",
     "compile": "tsc && node ./dist/src/index.js",
-    "dev": "nodemon -e ts --exec \"npm run compile\""
+    "dev": "nodemon -e ts --exec \"npm run compile\"",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "jest": {
     "preset": "ts-jest",
     "testTimeout": 10000,
@@ -52,7 +59,9 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0",
+    "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.2.2",
+    "rimraf": "^5.0.8",
     "typeorm": "^0.3.20"
   }
 }
